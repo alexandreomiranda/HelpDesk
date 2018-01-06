@@ -12,7 +12,8 @@ namespace HelpDeskDomain.Application.AutoMapper
         public DomainToViewModelMappingProfile()
         {
             CreateMap<Chamado, ChamadoViewModel>();
-          
+            CreateMap<Interacao, InteracaoViewModel>();
+            
         }
     }
 }
