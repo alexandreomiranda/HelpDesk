@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HelpDesk.Domain.Chamados;
 using HelpDesk.Domain.Chamados.Commands;
 using HelpDesk.Domain.Chamados.Repository;
 using HelpDesk.Domain.Core.Bus;
@@ -13,7 +14,7 @@ namespace HelpDeskDomain.Application.Services
 {
     public class ChamadoService : IChamadoService
     {
-        //TODO: Injetar...
+            
         private readonly IBus _bus;
         private readonly IChamadosRepository _repository;
         private readonly IUnitOfWork _uow;
@@ -29,7 +30,8 @@ namespace HelpDeskDomain.Application.Services
 
         public void AdicionarInteracaoChamado(Guid idChamado, InteracaoViewModel interacao)
         {
-            throw new NotImplementedException();
+            var command = new AdicionarInteracaoChamadoCommand();
+            _bus.SendCommand(command);
         }
 
         public void ConcluirChamado(Guid idChamado, Guid idUsuario)
@@ -38,22 +40,33 @@ namespace HelpDeskDomain.Application.Services
             _bus.SendCommand(command);
         }
 
+        public ChamadoViewModel RetornarChamado(Guid idChamado)
+        {
+            return _mapper.Map<ChamadoViewModel>(_repository.GetById(idChamado));
+        }
+
         public IEnumerable<ChamadoViewModel> RetornarPorPessoa(Guid idPessoa)
         {
-            throw new NotImplementedException();
+            return _mapper.Map<IEnumerable<ChamadoViewModel>>( _repository.RetornarPorPessoa(idPessoa));
         }
 
         public IEnumerable<ChamadoViewModel> RetornarPorUsuario(Guid idUsuario)
         {
-            throw new NotImplementedException();
+            return _mapper.Map<IEnumerable<ChamadoViewModel>>(_repository.RetornarPorUsuario(idUsuario));
         }
 
-        public void SalvarChamado(ChamadoViewModel chamado)
+        public void AdicionarChamado(ChamadoViewModel chamado)
         {
-           var command = _mapper.Map<SalvarChamadoCommand>(chamado);
+            var command = new SalvarChamadoCommand();
             _bus.SendCommand(command);
 
             
+        }
+
+        public void AlterarStatusChamado(Guid idChamado, Status status)
+        {
+            var command = new AlterarStatusChamadoCommand();
+            _bus.SendCommand(command);
         }
     }
 }

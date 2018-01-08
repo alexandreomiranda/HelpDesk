@@ -12,7 +12,7 @@ namespace HelpDesk.Domain.Core.Entity
         {
         }
 
-        public Guid ID { get; private set; }
+        public Guid ID { get; protected set; }
         
         public  ValidationResult ValidationResult{ get; protected set; }
 

@@ -1,4 +1,5 @@
-﻿using HelpDesk.Domain.Chamados.Repository;
+﻿using HelpDesk.Domain.Chamados.Events;
+using HelpDesk.Domain.Chamados.Repository;
 using HelpDesk.Domain.CommandHandlers;
 using HelpDesk.Domain.Core.Bus;
 using HelpDesk.Domain.Core.Events;
@@ -10,9 +11,11 @@ using System.Text;
 
 namespace HelpDesk.Domain.Chamados.Commands
 {
-    class ChamadoCommandHandler : CommandHandler, 
+    class ChamadoCommandHandler : CommandHandler,
         IHandler<SalvarChamadoCommand>,
-        IHandler<ConcluirChamadoCommand>
+        IHandler<ConcluirChamadoCommand>,
+        IHandler<AdicionarInteracaoChamadoCommand>,
+IHandler<AlterarStatusChamadoCommand>
     {
 
         private readonly IChamadosRepository _repository;
@@ -30,8 +33,24 @@ namespace HelpDesk.Domain.Chamados.Commands
         public void Handle(ConcluirChamadoCommand message)
         {
 
-            
-            
+            var status = Status.RetornarStatusConcluido();
+            _repository.AtualizarStatusChamadoConcluido(
+                message.IDChamado,
+                message.IDUsuario,
+                status);
+
+            _bus.RaiseEvent(new ChamadoConcluidoEvent(message.IDChamado, message.IDUsuario, status));
+
+        }
+
+        public void Handle(AdicionarInteracaoChamadoCommand message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Handle(AlterarStatusChamadoCommand message)
+        {
+            throw new NotImplementedException();
         }
     }
 }

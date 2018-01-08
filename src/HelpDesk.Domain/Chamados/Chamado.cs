@@ -35,7 +35,7 @@ namespace HelpDesk.Domain.Chamados
 
         public ICollection<Interacao> Interacoes { get; private set; }
 
-        #endregion
+         #endregion
 
         #region Methods
         private void ValidarArgumentos(Usuario usuario, Assunto assunto, Pessoa pessoa)

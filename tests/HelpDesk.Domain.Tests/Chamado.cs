@@ -7,26 +7,47 @@ namespace HelpDesk.Domain.Tests
 {
     public class ChamadoTest
     {
-        [Fact]
-        public void CriarChamadoValido()
+
+        private static Chamado CriarChamado()
         {
-            //Arrange
             var faker = new Faker<Chamado>()
-             .CustomInstantiator(f => 
+             .CustomInstantiator(f =>
              Chamado.Factory.NovoChamado(
-                 f.Lorem.Paragraph(1), 
-                 new Usuario(), new Assunto(), 
+                 f.Lorem.Paragraph(1),
+                 new Usuario(), new Assunto(),
                  new Pessoa()
                  ));
 
 
             var chamado = faker.Generate();
+            return chamado;
+        }
+
+        [Fact]
+        public void CriarChamadoValido()
+        {
+            //Arrange
+            Chamado chamado = CriarChamado();
 
             //Act      
-            var chamadoValido =  chamado.IsValid();
+            var chamadoValido = chamado.IsValid();
 
             //Assert
             Assert.True(chamadoValido);
+        }
+
+     
+        [Fact]
+        public void ConcluirChamado()
+        {
+
+            //arrange...
+            Chamado chamado = CriarChamado();
+
+
+
+
+            
         }
     }
 }

@@ -5,7 +5,6 @@ using System.Text;
 
 namespace HelpDeskDomain.Application.AutoMapper
 {
-    //TODO:Inicializar...
     public class AutoMapperConfiguration
     {
         public static MapperConfiguration RegisterMappings()

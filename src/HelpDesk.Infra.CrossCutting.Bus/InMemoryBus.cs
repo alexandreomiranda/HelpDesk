@@ -7,7 +7,7 @@ using System;
 
 namespace HelpDesk.Infra.CrossCutting.Bus
 {
-    public class Bus : IBus
+    public class InMemoryBus : IBus
     {
         public static Func<IServiceProvider> ContainerAccessor { get; set; }
         private static IServiceProvider Container => ContainerAccessor();
