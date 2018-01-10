@@ -10,33 +10,33 @@ namespace HelpDesk.Domain.Chamados
         #region Properties
         public DateTime DataHora { get; private set; }
         public String Descricao { get; private set; }
-        public Usuario Usuario { get; private set; }
+        public Guid IdUsuario { get; private set; }
 
         #endregion
 
         #region Constructor
-        protected Interacao(DateTime dataHora, String descricao, Usuario usuario)
+        protected Interacao(DateTime dataHora, String descricao, Guid idUsuario)
         {
 
-            if (usuario == null)
-                throw new ArgumentNullException("usuario");
+
+            if (idUsuario == null) throw new ArgumentNullException("usuario");
             DataHora = dataHora;
             Descricao = descricao;
-            Usuario = usuario;
+            IdUsuario = idUsuario;
 
 
         }
         #endregion
 
         #region Methods
-  public override bool IsValid()
+        public override bool IsValid()
         {
             RuleFor(p => p.Descricao).NotEmpty().WithMessage("A descrição deve ser preenchida.");
-
+            ValidationResult = Validate(this);
             return ValidationResult.IsValid;
         }
         #endregion
 
-      
+
     }
 }

@@ -10,6 +10,8 @@ namespace HelpDesk.Domain.Chamados
     {
 
         private static Status _statusConcluido;
+
+        #region construtor
         static Status()
         {
             _statusConcluido = Factory.Create(Guid.Parse("00000000-0000-0000-0000-000000000000"), "Concluído", true);
@@ -22,16 +24,20 @@ namespace HelpDesk.Domain.Chamados
             this.IndicaConcluido = indicaConcluido;
                      
         }
+        #endregion
 
-         public String Nome { private set; get; }
+        #region properties
+        public String Nome { private set; get; }
         public bool IndicaConcluido { private set; get; }
+        #endregion
+
+        #region methods
 
 
         public static Status RetornarStatusConcluido()
         {
             return _statusConcluido;
         }
-
         public override bool IsValid()
         {
             RuleFor(p => p.Nome)
@@ -42,7 +48,9 @@ namespace HelpDesk.Domain.Chamados
             return ValidationResult.IsValid;
         }
 
-       
+        #endregion
+
+        #region factory
         private class Factory
         {
             public static Status Create(Guid id, String nome, bool indicaConcluido)
@@ -50,7 +58,7 @@ namespace HelpDesk.Domain.Chamados
                 return new Status(id, nome,  indicaConcluido);
             }
         }
-
+        #endregion
 
     }
 }

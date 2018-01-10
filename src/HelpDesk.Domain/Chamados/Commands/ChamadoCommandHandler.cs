@@ -27,7 +27,7 @@ IHandler<AlterarStatusChamadoCommand>
 
         public void Handle(SalvarChamadoCommand message)
         {
-            throw new NotImplementedException();
+            _repository.Insert(Chamado.Factory.NovoChamado(message.Descricao,message.IdUsuarioCriacao, message.IdAssunto, message.IdPessoa));
         }
 
         public void Handle(ConcluirChamadoCommand message)

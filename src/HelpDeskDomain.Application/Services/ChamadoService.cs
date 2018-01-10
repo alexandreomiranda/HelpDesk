@@ -55,12 +55,11 @@ namespace HelpDeskDomain.Application.Services
             return _mapper.Map<IEnumerable<ChamadoViewModel>>(_repository.RetornarPorUsuario(idUsuario));
         }
 
-        public void AdicionarChamado(ChamadoViewModel chamado)
+        public void AdicionarChamado(ChamadoViewModel chamadoViewModel)
         {
-            var command = new SalvarChamadoCommand();
+            var command = Mapper.Map<SalvarChamadoCommand>(chamadoViewModel);
             _bus.SendCommand(command);
-
-            
+           
         }
 
         public void AlterarStatusChamado(Guid idChamado, Status status)

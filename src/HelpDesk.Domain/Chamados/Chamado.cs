@@ -9,13 +9,13 @@ namespace HelpDesk.Domain.Chamados
     public class Chamado : Entity<Chamado>
     {
         #region constructor
-        protected Chamado(String descricao, Usuario usuario, Assunto assunto, Pessoa pessoa)
+        protected Chamado(String descricao, Guid idUsuarioCriacao, Guid idAssunto, Guid idPessoa)
         {
-            ValidarArgumentos(usuario, assunto, pessoa);
+            ValidarArgumentos(idUsuarioCriacao, idAssunto, idPessoa);
             this.Descricao = descricao;
-            this.UsuarioCriacao = usuario;
-            this.Assunto = assunto;
-            this.Pessoa = pessoa;
+            this.IdUsuarioCriacao = idUsuarioCriacao;
+            this.IdAssunto = idAssunto;
+            this.IdPessoa = idPessoa;
 
 
         }
@@ -27,22 +27,22 @@ namespace HelpDesk.Domain.Chamados
 
         public DateTime DataAbertura { get; private set; }
         public String Descricao { get; private set; }
-        public Usuario UsuarioCriacao { get; private set; }
-        public Assunto Assunto { get; private set; }
-        public Pessoa Pessoa { get; private set; }
+        public Guid IdUsuarioCriacao { get; private set; }
+        public Guid IdAssunto { get; private set; }
+        public Guid IdPessoa { get; private set; }
 
-        public Status Status { get; private set; }
+        public Guid IdStatus { get; private set; }
 
         public ICollection<Interacao> Interacoes { get; private set; }
 
          #endregion
 
         #region Methods
-        private void ValidarArgumentos(Usuario usuario, Assunto assunto, Pessoa pessoa)
+        private void ValidarArgumentos(Guid idUsuarioCriacao, Guid idAssunto, Guid idPessoa)
         {
-            if (usuario == null) throw new ArgumentNullException("descricao");
-            if (assunto == null) throw new ArgumentNullException("assunto");
-            if (pessoa == null) throw new ArgumentNullException("pessoa");
+            if (idUsuarioCriacao == null) throw new ArgumentNullException("usuario");
+            if (idAssunto == null) throw new ArgumentNullException("idassunto");
+            if (idPessoa == null) throw new ArgumentNullException("idpessoa");
         }
 
         public override bool IsValid()
@@ -63,12 +63,12 @@ namespace HelpDesk.Domain.Chamados
 
         #endregion
         
-        #region Class 
+        #region Factory 
         public class Factory
         {
-            public static Chamado NovoChamado(String descricao, Usuario usuario, Assunto assunto, Pessoa pessoa)
+            public static Chamado NovoChamado(String descricao, Guid idUsuarioCriacao, Guid idAssunto, Guid idPessoa)
             {
-                Chamado retorno = new Chamado(descricao, usuario, assunto, pessoa);
+                Chamado retorno = new Chamado(descricao, idUsuarioCriacao, idAssunto, idPessoa);
                 retorno.DataAbertura = DateTime.Now;
                 return retorno;
             }
