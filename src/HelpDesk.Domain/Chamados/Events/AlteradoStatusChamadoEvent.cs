@@ -1,20 +1,20 @@
-﻿using HelpDesk.Domain.Core.Commands;
+﻿using HelpDesk.Domain.Core.Events;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HelpDesk.Domain.Chamados.Commands
+namespace HelpDesk.Domain.Chamados.Events
 {
-    public class AlterarStatusChamadoCommand : Command
+    public class AlteradoStatusChamadoEvent : Event
     {
 
         #region properties
-        public Guid IdChamado  { get; private set; }
+        public Guid IdChamado { get; private set; }
         public Guid IdStatus { get; private set; }
         #endregion
 
         #region constructor
-        public AlterarStatusChamadoCommand(Guid idChamado, Guid idStatus)
+        public AlteradoStatusChamadoEvent(Guid idChamado, Guid idStatus)
         {
             IdChamado = idChamado;
             IdStatus = IdStatus;

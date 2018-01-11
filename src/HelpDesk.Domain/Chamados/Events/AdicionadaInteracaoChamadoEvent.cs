@@ -1,11 +1,11 @@
-﻿using HelpDesk.Domain.Core.Commands;
+﻿using HelpDesk.Domain.Core.Events;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HelpDesk.Domain.Chamados.Commands
+namespace HelpDesk.Domain.Chamados.Events
 {
-    public class AdicionarInteracaoChamadoCommand : Command
+    public class AdicionadaInteracaoChamadoEvent : Event
     {
         #region properties
         public DateTime DataHora { get; private set; }
@@ -15,13 +15,13 @@ namespace HelpDesk.Domain.Chamados.Commands
         #endregion
 
         #region constructor
-        public AdicionarInteracaoChamadoCommand(Guid idChamado, Guid idUsuario, String descricao, DateTime dataHora)
+        public AdicionadaInteracaoChamadoEvent(Guid idChamado, Guid idUsuario, String descricao, DateTime dataHora)
         {
             DataHora = dataHora;
             Descricao = descricao;
             IdUsuario = idUsuario;
             IdChamado = idChamado;
-            
+
         }
         #endregion
     }

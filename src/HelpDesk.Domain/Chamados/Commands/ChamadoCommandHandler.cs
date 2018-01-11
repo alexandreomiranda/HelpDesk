@@ -37,7 +37,7 @@ IHandler<AlterarStatusChamadoCommand>
             _repository.AtualizarStatusChamadoConcluido(
                 message.IDChamado,
                 message.IDUsuario,
-                status);
+                status.ID);
 
             _bus.RaiseEvent(new ChamadoConcluidoEvent(message.IDChamado, message.IDUsuario, status));
 
@@ -45,12 +45,14 @@ IHandler<AlterarStatusChamadoCommand>
 
         public void Handle(AdicionarInteracaoChamadoCommand message)
         {
-            throw new NotImplementedException();
+            _repository.AdicionarInteracao(message.IdChamado, new Interacao(message.DataHora, message.Descricao,message.IdUsuario,message.IdChamado));
+            _bus.RaiseEvent(new AdicionadaInteracaoChamadoEvent(message.IdChamado,message.IdUsuario,message.Descricao,message.DataHora));
         }
 
         public void Handle(AlterarStatusChamadoCommand message)
         {
-            throw new NotImplementedException();
+                        _repository.AtualizarStatusChamado(message.IdChamado, message.IdStatus);
+            _bus.RaiseEvent(new AlteradoStatusChamadoEvent(message.IdChamado, message.IdStatus));
         }
     }
 }

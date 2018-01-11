@@ -11,11 +11,12 @@ namespace HelpDesk.Domain.Chamados
         public DateTime DataHora { get; private set; }
         public String Descricao { get; private set; }
         public Guid IdUsuario { get; private set; }
+        public Guid IdChamado { get; private set; }
 
         #endregion
 
         #region Constructor
-        protected Interacao(DateTime dataHora, String descricao, Guid idUsuario)
+        public Interacao(DateTime dataHora, String descricao, Guid idUsuario, Guid idChamado)
         {
 
 
@@ -23,9 +24,11 @@ namespace HelpDesk.Domain.Chamados
             DataHora = dataHora;
             Descricao = descricao;
             IdUsuario = idUsuario;
+            IdChamado = IdChamado;
 
 
         }
+
         #endregion
 
         #region Methods

@@ -30,7 +30,7 @@ namespace HelpDeskDomain.Application.Services
 
         public void AdicionarInteracaoChamado(Guid idChamado, InteracaoViewModel interacao)
         {
-            var command = new AdicionarInteracaoChamadoCommand();
+            var command = _mapper.Map<AdicionarInteracaoChamadoCommand>(interacao);
             _bus.SendCommand(command);
         }
 
@@ -64,7 +64,7 @@ namespace HelpDeskDomain.Application.Services
 
         public void AlterarStatusChamado(Guid idChamado, Status status)
         {
-            var command = new AlterarStatusChamadoCommand();
+            var command = new AlterarStatusChamadoCommand(idChamado,status.ID);
             _bus.SendCommand(command);
         }
     }
