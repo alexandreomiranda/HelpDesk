@@ -1,11 +1,11 @@
 ﻿using HelpDesk.Domain.Chamados;
 using HelpDesk.Domain.Core.Bus;
-using HelpDeskDomain.Application.ViewModels;
+using HelpDesk.Domain.Application.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HelpDeskDomain.Application.Interfaces
+namespace HelpDesk.Domain.Application.Interfaces
 {
     public interface IChamadoService
     {

@@ -4,13 +4,13 @@ using HelpDesk.Domain.Chamados.Commands;
 using HelpDesk.Domain.Chamados.Repository;
 using HelpDesk.Domain.Core.Bus;
 using HelpDesk.Domain.Interfaces;
-using HelpDeskDomain.Application.Interfaces;
-using HelpDeskDomain.Application.ViewModels;
+using HelpDesk.Domain.Application.Interfaces;
+using HelpDesk.Domain.Application.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HelpDeskDomain.Application.Services
+namespace HelpDesk.Domain.Application.Services
 {
     public class ChamadoService : IChamadoService
     {

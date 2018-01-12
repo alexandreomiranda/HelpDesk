@@ -14,8 +14,9 @@ namespace HelpDesk.Domain.Tests
              .CustomInstantiator(f =>
              Chamado.Factory.NovoChamado(
                  f.Lorem.Paragraph(1),
-                 new Usuario(), new Assunto(),
-                 new Pessoa()
+                Guid.NewGuid(),
+                Guid.NewGuid(),
+                Guid.NewGuid()
                  ));
 
 

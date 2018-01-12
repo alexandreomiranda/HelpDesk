@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using HelpDesk.Domain.Chamados;
-using HelpDeskDomain.Application.ViewModels;
+using HelpDesk.Domain.Application.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HelpDeskDomain.Application.AutoMapper
+namespace HelpDesk.Domain.Application.AutoMapper
 {
     public class DomainToViewModelMappingProfile : Profile
     {

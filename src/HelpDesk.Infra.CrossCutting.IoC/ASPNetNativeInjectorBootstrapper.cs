@@ -10,9 +10,9 @@ using HelpDesk.Domain.Core.Events;
 using HelpDesk.Domain.Core.Notifications;
 using HelpDesk.Domain.Interfaces;
 using HelpDesk.Infra.CrossCutting.Bus;
-using HelpDeskDomain.Application.AutoMapper;
-using HelpDeskDomain.Application.Interfaces;
-using HelpDeskDomain.Application.Services;
+using HelpDesk.Domain.Application.AutoMapper;
+using HelpDesk.Domain.Application.Interfaces;
+using HelpDesk.Domain.Application.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 

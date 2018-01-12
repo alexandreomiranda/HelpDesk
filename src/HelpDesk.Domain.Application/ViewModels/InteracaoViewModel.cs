@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HelpDeskDomain.Application.ViewModels
+namespace HelpDesk.Domain.Application.ViewModels
 {
    public class InteracaoViewModel
     {
