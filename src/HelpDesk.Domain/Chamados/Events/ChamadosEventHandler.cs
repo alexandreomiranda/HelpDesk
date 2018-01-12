@@ -1,16 +1,23 @@
 ﻿using HelpDesk.Domain.Core.Events;
+using HelpDesk.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace HelpDesk.Domain.Chamados.Events
 {
-    class ChamadosEventHandler :
+    public class ChamadosEventHandler :
         IHandler<ChamadoConcluidoEvent>, 
         IHandler<AdicionadaInteracaoChamadoEvent>, 
         IHandler<AlteradoStatusChamadoEvent>,
         IHandler<ChamadoSalvoEvent>
     {
+        private IEventRepository _eventRepository;
+        public ChamadosEventHandler(IEventRepository eventRepository)
+        {
+            _eventRepository = eventRepository;
+        }
+
         public void Handle(ChamadoConcluidoEvent message)
         {
             HandleMessage(message);
@@ -31,9 +38,9 @@ namespace HelpDesk.Domain.Chamados.Events
             HandleMessage(message);
         }
 
-        public void HandleMessage(Message message)
+        public void HandleMessage(Event message)
         {
-            Console.WriteLine(message.ToString());
+            _eventRepository.Insert(message);
         }
     }
 }

@@ -14,13 +14,13 @@ namespace HelpDeskDomain.Application.Services
 {
     public class ChamadoService : IChamadoService
     {
-            
+
         private readonly IBus _bus;
         private readonly IChamadosRepository _repository;
         private readonly IUnitOfWork _uow;
         private readonly IMapper _mapper;
 
-         public ChamadoService(IBus bus, IChamadosRepository repository, IUnitOfWork uow, IMapper mapper)
+        public ChamadoService(IBus bus, IChamadosRepository repository, IUnitOfWork uow, IMapper mapper)
         {
             _bus = bus;
             _repository = repository;
@@ -47,7 +47,7 @@ namespace HelpDeskDomain.Application.Services
 
         public IEnumerable<ChamadoViewModel> RetornarPorPessoa(Guid idPessoa)
         {
-            return _mapper.Map<IEnumerable<ChamadoViewModel>>( _repository.RetornarPorPessoa(idPessoa));
+            return _mapper.Map<IEnumerable<ChamadoViewModel>>(_repository.RetornarPorPessoa(idPessoa));
         }
 
         public IEnumerable<ChamadoViewModel> RetornarPorUsuario(Guid idUsuario)
@@ -59,12 +59,11 @@ namespace HelpDeskDomain.Application.Services
         {
             var command = Mapper.Map<SalvarChamadoCommand>(chamadoViewModel);
             _bus.SendCommand(command);
-           
         }
 
         public void AlterarStatusChamado(Guid idChamado, Status status)
         {
-            var command = new AlterarStatusChamadoCommand(idChamado,status.ID);
+            var command = new AlterarStatusChamadoCommand(idChamado, status.ID);
             _bus.SendCommand(command);
         }
     }

@@ -14,7 +14,12 @@ namespace HelpDesk.Data.Repository
             throw new NotImplementedException();
         }
 
-        public void AtualizarStatusChamadoConcluido(Guid idChamado, Guid iDUsuario, Status concluido)
+        public void AtualizarStatusChamado(Guid idChamado, Guid idStatus)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AtualizarStatusChamadoConcluido(Guid idChamado, Guid idUsuario, Guid idStatusConcluido)
         {
             throw new NotImplementedException();
         }

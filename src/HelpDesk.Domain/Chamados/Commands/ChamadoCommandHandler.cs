@@ -11,7 +11,7 @@ using System.Text;
 
 namespace HelpDesk.Domain.Chamados.Commands
 {
-    class ChamadoCommandHandler : CommandHandler,
+    public class ChamadoCommandHandler : CommandHandler,
         IHandler<SalvarChamadoCommand>,
         IHandler<ConcluirChamadoCommand>,
         IHandler<AdicionarInteracaoChamadoCommand>,
@@ -27,7 +27,10 @@ IHandler<AlterarStatusChamadoCommand>
 
         public void Handle(SalvarChamadoCommand message)
         {
-            _repository.Insert(Chamado.Factory.NovoChamado(message.Descricao,message.IdUsuarioCriacao, message.IdAssunto, message.IdPessoa));
+            _repository.Insert(Chamado.Factory.NovoChamado(message.Descricao, message.IdUsuarioCriacao, message.IdAssunto, message.IdPessoa));
+
+            if (Commit())
+                _bus.RaiseEvent(new ChamadoSalvoEvent(message.Descricao, message.IdPessoa, message.IdAssunto, message.IdUsuarioCriacao, message.DataAbertura));
         }
 
         public void Handle(ConcluirChamadoCommand message)
@@ -39,20 +42,25 @@ IHandler<AlterarStatusChamadoCommand>
                 message.IDUsuario,
                 status.ID);
 
-            _bus.RaiseEvent(new ChamadoConcluidoEvent(message.IDChamado, message.IDUsuario, status));
+            if (Commit())
+                _bus.RaiseEvent(new ChamadoConcluidoEvent(message.IDChamado, message.IDUsuario, status));
 
         }
 
         public void Handle(AdicionarInteracaoChamadoCommand message)
         {
-            _repository.AdicionarInteracao(message.IdChamado, new Interacao(message.DataHora, message.Descricao,message.IdUsuario,message.IdChamado));
-            _bus.RaiseEvent(new AdicionadaInteracaoChamadoEvent(message.IdChamado,message.IdUsuario,message.Descricao,message.DataHora));
+            _repository.AdicionarInteracao(message.IdChamado, new Interacao(message.DataHora, message.Descricao, message.IdUsuario, message.IdChamado));
+
+            if (Commit())
+                _bus.RaiseEvent(new AdicionadaInteracaoChamadoEvent(message.IdChamado, message.IdUsuario, message.Descricao, message.DataHora));
         }
 
         public void Handle(AlterarStatusChamadoCommand message)
         {
-                        _repository.AtualizarStatusChamado(message.IdChamado, message.IdStatus);
-            _bus.RaiseEvent(new AlteradoStatusChamadoEvent(message.IdChamado, message.IdStatus));
+            _repository.AtualizarStatusChamado(message.IdChamado, message.IdStatus);
+            
+            if (Commit())
+                _bus.RaiseEvent(new AlteradoStatusChamadoEvent(message.IdChamado, message.IdStatus));
         }
     }
 }

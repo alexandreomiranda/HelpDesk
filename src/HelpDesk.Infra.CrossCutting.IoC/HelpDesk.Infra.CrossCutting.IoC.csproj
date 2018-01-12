@@ -12,6 +12,7 @@
     <ProjectReference Include="..\HelpDesk.Data\HelpDesk.Data.csproj" />
     <ProjectReference Include="..\HelpDesk.Domain\HelpDesk.Domain.csproj" />
     <ProjectReference Include="..\HelpDesk.Infra.CrossCutting.Bus\HelpDesk.Infra.CrossCutting.Bus.csproj" />
+    <ProjectReference Include="..\HelpDesk.Infra.CrossCutting.EventRepository\HelpDesk.Infra.CrossCutting.EventRepository.csproj" />
     <ProjectReference Include="..\HelpDeskDomain.Application\HelpDeskDomain.Application.csproj" />
   </ItemGroup>
 
